@@ -1,5 +1,5 @@
-%define version 0.2.7
-%define release %mkrel 9
+%define version 0.3.1
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %{name}_ %major
@@ -15,12 +15,12 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Source0:	http://download.sourceforge.net/tse3/%{name}-%{version}.tar.bz2
 Patch0:		tse3_alsa1.x_and_sustain.patch
-Patch1:		tse3-fix-compile-gcc-3.4.patch
+Patch1:		tse3-0.3.1-gcc4.patch
 Patch2:         tse3-fix-compile-amd64.patch
+Patch3:		tse3-0.3.1-libtool.patch
 BuildRequires:	alsa-lib-devel >= 1.0
 BuildRequires:	automake1.8
-BuildRequires:	kdemultimedia-devel
-BuildRequires:	kdelibs-common
+BuildRequires:	kdemultimedia-arts-devel
 
 %description
 TSE3 is a powerful open source sequencer engine written in C++. It is
@@ -52,20 +52,18 @@ Tse3 header files.
 
 %prep
 %setup -q
-%patch0 -p1 -b .alsa10_and_sustain
-%patch1 -p1 -b .fix_compile_gcc_3_4
-
-%ifarch x86_64
-%patch2 -p1 -b .fix_compile_amd64
-%endif
-
-AUTOMAKE=automake-1.9 ACLOCAL=aclocal-1.9 autoreconf --force --install
+%patch1 -p0 -b .fix_compile_gcc4
+%patch2 -p0 -b .fix_compile_amd64
+%patch3 -p0
 
 %build
-CXXFLAGS="%optflags -fno-rtti"
-%configure2_5x
+#AUTOMAKE=automake-1.9 ACLOCAL=aclocal-1.9 autoreconf --force --install
+autoreconf --force --install
+#CXXFLAGS="%optflags -fno-rtti"
+%configure2_5x --with-alsa \
+	--without-aRts --without-oss
 # doesn't support SMP build
-make
+%make -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
