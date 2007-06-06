@@ -1,5 +1,5 @@
 %define version 0.2.7
-%define release %mkrel 8
+%define release %mkrel 9
 
 %define major 0
 %define libname %mklibname %{name}_ %major
@@ -14,9 +14,9 @@ URL:		http://download.sourceforge.net/tse3/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Source0:	http://download.sourceforge.net/tse3/%{name}-%{version}.tar.bz2
-Patch0:		tse3_alsa1.x_and_sustain.patch.bz2
-Patch1:		tse3-fix-compile-gcc-3.4.patch.bz2
-Patch2:         tse3-fix-compile-amd64.patch.bz2
+Patch0:		tse3_alsa1.x_and_sustain.patch
+Patch1:		tse3-fix-compile-gcc-3.4.patch
+Patch2:         tse3-fix-compile-amd64.patch
 BuildRequires:	alsa-lib-devel >= 1.0
 BuildRequires:	automake1.8
 BuildRequires:	kdemultimedia-devel
