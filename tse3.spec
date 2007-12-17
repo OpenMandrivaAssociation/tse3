@@ -11,7 +11,6 @@ Release:	%{release}
 License:	GPL
 Group:		Sound
 URL:		http://download.sourceforge.net/tse3/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Source0:	http://download.sourceforge.net/tse3/%{name}-%{version}.tar.bz2
 Patch0:		tse3_alsa1.x_and_sustain.patch
