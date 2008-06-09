@@ -78,8 +78,12 @@ perl -pi -e 's/\015$//' %buildroot/usr/include/tse3/plt/Win32.cpp
 perl -pi -e 's/\015$//' %buildroot/usr/include/tse3/plt/Win32.h
 
 
+%if %mdkversion < 200900
 %post   -n %{libname} -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
