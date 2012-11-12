@@ -1,0 +1,12 @@
+--- configure.in.old	Mon Aug 19 18:09:26 2002
++++ configure.in	Mon Aug 19 18:11:04 2002
+@@ -50,6 +50,9 @@
+ # Library creation
+ AM_ENABLE_SHARED
+ AM_DISABLE_STATIC
++
++#hack needed until libtool 1.4e
++CC=$CXX
+ AM_PROG_LIBTOOL
+ AC_SUBST(LIBTOOL_DEPS)
+ 

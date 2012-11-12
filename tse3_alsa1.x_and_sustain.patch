@@ -1,0 +1,40 @@
+diff -Naur tse3-0.2.7/configure.in tse3new-0.2.7/configure.in
+--- tse3-0.2.7/configure.in	2003-03-06 17:15:53.000000000 +0100
++++ tse3new-0.2.7/configure.in	2004-06-17 13:22:33.000000000 +0200
+@@ -188,7 +188,7 @@
+     AC_CHECK_LIB(asound,snd_seq_create_simple_port,[
+       AC_TRY_RUN([
+ #include <$alsa_header_prefix/asoundlib.h>
+-int main() { return SND_LIB_MINOR != 5 && SND_LIB_MINOR != 9; }
++int main() { return SND_LIB_MINOR != 5 && SND_LIB_MINOR != 9  && SND_LIB_MAJOR != 1; }
+         ] ,[
+         have_alsa="yes"
+         LIBASOUND="-lasound"
+@@ -220,7 +220,7 @@
+     if test "$alsa_version" = "0.5"; then
+       AC_DEFINE(TSE3_WITH_ALSA_0_5_X,1,[Define if you have Alsa 0.5.x])
+     fi
+-    if test "$alsa_version" = "0.9"; then
++    if test "$alsa_version" = "0.9" -o "$alsa_version" = "1.0"; then
+       AC_DEFINE(TSE3_WITH_ALSA_0_9_X,1,[Define if you have Alsa 0.9.x])
+     fi
+   fi
+diff -Naur tse3-0.2.7/src/tse3/PhraseEdit.cpp tse3new-0.2.7/src/tse3/PhraseEdit.cpp
+--- tse3-0.2.7/src/tse3/PhraseEdit.cpp	2002-07-28 17:17:08.000000000 +0200
++++ tse3new-0.2.7/src/tse3/PhraseEdit.cpp	2004-06-17 13:22:53.000000000 +0200
+@@ -92,6 +92,7 @@
+         }
+     }
+ 
++#ifdef XXX
+     // Deal with the sustain pedal: strip it out and elongate notes accordingly
+     for (int pos = size()-1; pos >= 0; --pos)
+     {
+@@ -126,6 +127,7 @@
+         }
+     }
+     if (altered) sort(data.begin(), data.end());
++#endif
+ 
+     // Remove any sustain pedal up events still hanging around
+     for (int n = size()-1; n >= 0; --n)

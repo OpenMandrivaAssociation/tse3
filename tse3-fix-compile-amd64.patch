@@ -1,0 +1,26 @@
+--- src/tse3/file/XML.cpp
++++ src/tse3/file/XML.cpp
+@@ -117,6 +117,13 @@
+ }
+ 
+ 
++void TSE3::File::XmlFileWriter::element(const std::string &name, unsigned long value)
++{
++    indent(out);
++    out << "<" << name << " value=\"" << value << "\"/>\n";
++}
++
++
+ void TSE3::File::XmlFileWriter::element(const std::string &name, bool value)
+ {
+     indent(out);
+--- src/tse3/file/XML.h
++++ src/tse3/file/XML.h
+@@ -154,6 +154,7 @@
+                 void element(const std::string &name, const char        *value);
+                 void element(const std::string &name, int                value);
+                 void element(const std::string &name, unsigned int       value);
++                void element(const std::string &name, unsigned long      value);
+                 void element(const std::string &name, bool               value);
+ 
+                 void comment(const std::string &comment);
