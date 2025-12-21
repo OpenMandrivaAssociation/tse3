@@ -18,6 +18,9 @@ Patch0:		tse3_alsa1.x_and_sustain.patch
 Patch1:		tse3-0.3.1-gcc4.patch
 Patch2:         tse3-fix-compile-amd64.patch
 Patch3:		tse3-0.3.1-libtool.patch
+BuildRequires:	autoconf
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	alsa-lib-devel >= 1.0
 BuildRequires:	automake1.8
 BuildRequires:	kdemultimedia-arts-devel
